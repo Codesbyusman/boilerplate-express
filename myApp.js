@@ -5,6 +5,9 @@ const { path } = require('express/lib/application');
 const req = require('express/lib/request');
 let app = express();
 
+bodyParser = require('body-parser')
+
+
 console.log('Hello World')
 
 absolutePath = __dirname + '/views/index.html'
@@ -19,6 +22,9 @@ console.log(absolutePath)
 //     );
 //   }
 // );
+
+app.use(bodyParser.urlencoded({extended: false}))
+
 
 app.get('/now', function(req, res, next){
     req.time = new Date().toString()
@@ -84,8 +90,19 @@ app.get('/json', get_data)
 // )
 
 
+app.get('/:word/echo', function(req, res, next){
+    res.send({echo: req.params.word})
+})
 
+app.post('/name' , function(req, res)
+{
+    var fname = req.body.first;
+    var lname = req.body.last;
 
+    res.json({
+        name: `${fname} ${lname}`
+    })
+})
 
 
 
