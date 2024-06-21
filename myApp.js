@@ -2,6 +2,7 @@ require('dotenv').config()
 
 let express = require('express');
 const { path } = require('express/lib/application');
+const req = require('express/lib/request');
 let app = express();
 
 console.log('Hello World')
@@ -9,14 +10,24 @@ console.log('Hello World')
 absolutePath = __dirname + '/views/index.html'
 console.log(absolutePath)
 
-app.use( function middleware(req, res, next) { 
-    console.log("I'm a middlewear...")
-    // Call the next function in line:
-    next(
-        console.log("I'm a next.. will log you..."),
-        console.log(req.method+ " " + req.path + " - " + req.ip)
-    );
-  }
+// app.use( function middleware(req, res, next) { 
+//     console.log("I'm a middlewear...")
+//     // Call the next function in line:
+//     next(
+//         console.log("I'm a next.. will log you..."),
+//         console.log(req.method+ " " + req.path + " - " + req.ip)
+//     );
+//   }
+// );
+
+app.get('/now', function(req, res, next){
+    req.time = new Date().toString()
+    next();
+},
+function(req, res, next){
+    console.log(req.time)
+    res.send({time: req.time})
+}
 );
 
 
