@@ -6,18 +6,24 @@ console.log('Hello World')
 
 absolutePath = __dirname + '/views/index.html'
 console.log(absolutePath)
+
+
 function hi (req, res) {
     res.send('Hello Express');
-  }
+}
 
-  function file (req, res) {
+function file (req, res) {
     res.sendFile(absolutePath);
-  }
+}
 
 
-app.get("/", file)
+absolutePath2 = __dirname + "/public"
 
+app.use(
+   "/public",  express.static(absolutePath2)
+  )
 
+app.get('/' , file)
 
 
 
