@@ -5,6 +5,7 @@ This is the boilerplate code for the Basic Node and Express Challenges. Instruct
 
 **Run locally**
   ```bash 
+  npm i
   npm start
   ```
 
